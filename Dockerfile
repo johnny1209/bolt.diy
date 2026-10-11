@@ -37,7 +37,6 @@ FROM build AS prod-deps
 
 # ---- production stage ----
 FROM build AS bolt-ai-production
-RUN pnpm add vite
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -62,6 +61,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl \
   && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /app/node_modules /app/node_modules
+RUN pnpm add vite
 
 # Pre-configure wrangler to disable metrics
 RUN mkdir -p /root/.config/.wrangler && \
