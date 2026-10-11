@@ -37,6 +37,7 @@ FROM build AS prod-deps
 
 # ---- production stage ----
 FROM build AS bolt-ai-production
+RUN pnpm add vite
 WORKDIR /app
 
 ENV NODE_ENV=production
