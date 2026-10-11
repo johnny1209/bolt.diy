@@ -20,7 +20,7 @@ ENV VITE_PUBLIC_APP_URL=${VITE_PUBLIC_APP_URL}
 # Install deps efficiently
 COPY package.json pnpm-lock.yaml* ./
 RUN pnpm fetch
-pnpm add vite
+RUN pnpm add vite
 FROM build AS bolt-ai-production
 RUN pnpm install --offline --frozen-lockfile
 
