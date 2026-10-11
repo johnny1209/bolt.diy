@@ -61,12 +61,7 @@ ENV WRANGLER_SEND_METRICS=false \
 RUN apt-get update && apt-get install -y --no-install-recommends curl \
   && rm -rf /var/lib/apt/lists/*
 
-# Copy built files
-COPY --from=prod-deps /app/build /app/build
-COPY --from=prod-deps /app/node_modules /app/node_modules
-COPY --from=prod-deps /app/package.json /app/package.json
-COPY --from=prod-deps /app/wrangler.jsonc /app/wrangler.jsonc
-RUN pnpm add vite
+COPY --from=build /app/node_modules /app/node_modules
 
 # Pre-configure wrangler to disable metrics
 RUN mkdir -p /root/.config/.wrangler && \
