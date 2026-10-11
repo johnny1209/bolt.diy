@@ -36,7 +36,7 @@ FROM build AS prod-deps
 
 
 # ---- production stage ----
-FROM prod-deps AS bolt-ai-production
+FROM build AS bolt-ai-production
 WORKDIR /app
 
 ENV NODE_ENV=production
