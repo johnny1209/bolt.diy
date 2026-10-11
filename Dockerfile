@@ -33,7 +33,6 @@ RUN NODE_OPTIONS=--max-old-space-size=4096 pnpm run build
 FROM build AS prod-deps
 
 # Keep only production deps for runtime
-RUN pnpm prune --ignore-scripts
 
 
 # ---- production stage ----
