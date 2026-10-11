@@ -39,6 +39,7 @@ FROM build AS prod-deps
 FROM build AS bolt-ai-production
 COPY --from=build /app/node_modules /app/node_modules
 WORKDIR /app
+RUN pnpm add vite
 
 ENV NODE_ENV=production
 ENV PORT=5173
