@@ -20,9 +20,6 @@ ENV VITE_PUBLIC_APP_URL=${VITE_PUBLIC_APP_URL}
 # Install deps efficiently
 COPY package.json pnpm-lock.yaml* ./
 RUN pnpm fetch
-FROM build AS bolt-ai-production
-RUN pnpm install --offline --frozen-lockfile
-RUN pnpm add vite
 
 # Copy source and build
 COPY . .
@@ -40,6 +37,7 @@ FROM build AS prod-deps
 
 # ---- production stage ----
 FROM build AS bolt-ai-production
+RUN pnpm add vite
 WORKDIR /app
 
 ENV NODE_ENV=production
