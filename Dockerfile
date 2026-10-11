@@ -21,6 +21,7 @@ ENV VITE_PUBLIC_APP_URL=${VITE_PUBLIC_APP_URL}
 COPY package.json pnpm-lock.yaml* ./
 RUN pnpm fetch
 pnpm add vite
+RUN pnpm install --offline --frozen-lockfile
 
 # Copy source and build
 COPY . .
