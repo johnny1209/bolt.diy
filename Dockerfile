@@ -36,8 +36,8 @@ FROM build AS prod-deps
 
 
 # ---- production stage ----
-FROM build AS bolt-ai-production
 COPY --from=build /app/node_modules /app/node_modules
+RUN pnpm add vite && pnpm exec vite --version
 WORKDIR /app
 RUN pnpm add vite
 
