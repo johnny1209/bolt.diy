@@ -37,6 +37,9 @@ FROM build AS prod-deps
 
 # ---- production stage ----
 COPY --from=build /app/node_modules /app/node_modules
+RUN pnpm add vite \
+ && test -x /app/node_modules/.bin/vite \
+ && pnpm exec vite --version
 RUN pnpm add vite && pnpm exec vite --version
 WORKDIR /app
 RUN pnpm add vite
