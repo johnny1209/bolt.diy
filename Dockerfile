@@ -1,5 +1,6 @@
 # ---- build stage ----
 FROM node:22-bookworm-slim AS build
+FROM prod-deps AS bolt-ai-production
 WORKDIR /app
 
 # CI-friendly env
@@ -36,13 +37,10 @@ FROM build AS prod-deps
 
 
 # ---- production stage ----
-COPY --from=build /app/node_modules /app/node_modules
-RUN pnpm add vite \
+FROM prod-deps AS bolt-ai-production
  && test -x /app/node_modules/.bin/vite \
  && pnpm exec vite --version
-RUN pnpm add vite && pnpm exec vite --version
-WORKDIR /app
-RUN pnpm add vite
+RUN test -x /app/node_modules/.bin/vite && pnpm exec vite --version
 
 ENV NODE_ENV=production
 ENV PORT=5173
@@ -65,8 +63,6 @@ ENV WRANGLER_SEND_METRICS=false \
 RUN apt-get update && apt-get install -y --no-install-recommends curl \
   && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /app/node_modules /app/node_modules
-RUN pnpm add vite
 
 # Pre-configure wrangler to disable metrics
 RUN mkdir -p /root/.config/.wrangler && \
