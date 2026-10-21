@@ -1,6 +1,6 @@
 # ---- build stage ----
 FROM node:22-bookworm-slim AS build
-FROM prod-deps AS bolt-ai-production
+FROM build AS bolt-ai-production
 WORKDIR /app
 
 # CI-friendly env
