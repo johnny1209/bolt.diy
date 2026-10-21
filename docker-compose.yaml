@@ -35,12 +35,12 @@ services:
     profiles:
       - production
 
-  app-dev: target: development
+    app-dev:
     image: bolt-ai:development
     build:
-  context: .
-  dockerfile: Dockerfile
-  target: bolt-ai-production
+      context: .
+      dockerfile: Dockerfile
+      target: development
     env_file: 
       - '.env'
       - '.env.local'
