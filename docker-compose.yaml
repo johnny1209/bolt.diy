@@ -35,7 +35,7 @@ services:
     profiles:
       - production
 
-  app-dev:
+  app-dev: target: development
     image: bolt-ai:development
     build:
   context: .
